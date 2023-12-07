@@ -1,6 +1,12 @@
 # Iniciando com Create React App para Venda de Midis
 
 Este projeto foi configurado inicialmente com [Create React App](https://github.com/facebook/create-react-app).
+# Detalhes do Projeto
+
+Por segurança a pasta de "services" dentro de "src" foi removida.
+O projeto é conectado ao WooCommerce e consequentimente ao Wordpress,
+Você pode roda o projeto com um wordpress e WooComerce localmente ou solicitar acesso a nossa API.
+Para maires informações https://codesdevs.com
 
 ## Scripts Disponíveis
 
