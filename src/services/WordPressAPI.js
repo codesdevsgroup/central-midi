@@ -9,7 +9,7 @@ const useWordPressAPI = (endpoint, params = {}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://centralmidi.codesdevs.com/wp-json/wp/v2/${endpoint}`, {
+        const response = await axios.get(`https://projeto.codesdevs.com/wp-json/wp/v2/${endpoint}`, {
           params: { ...params },
         });
 
