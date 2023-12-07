@@ -17,9 +17,9 @@ const CustomNavbar = () => {
         </Form>
         <Nav className="mr-auto">
           <Nav.Link as={Link} to="/">Inicio</Nav.Link>
-          <Nav.Link as={Link} to="../services">Serviços</Nav.Link>
           <Nav.Link as={Link} to="/midis">Midis</Nav.Link>
-          <Nav.Link as={Link} to="/contato">Contato</Nav.Link>
+          <Nav.Link as={Link} to="/services">Serviços</Nav.Link>
+          <Nav.Link as={Link} to="/contact">Contato</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
