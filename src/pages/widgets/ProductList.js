@@ -42,7 +42,7 @@ const ProductList = () => {
         {products.map((product) => (
           <li key={product.id}>
             {product.name} - {product.price} - Categoria(s):{' '}
-            {product.categories.map((category) => category.name).join(', ')} - 
+            {product.categories.map((category) => category.name).join(', ')} 
            {/*  Naturalidade: {product.acf.naturalidade || 'N/A'} - 
             Gênero: {product.acf.genero || 'N/A'} - 
             RLM: {product.acf.rlm || 'N/A'} */}
