@@ -1,41 +1,23 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, Form, FormControl, Button, Dropdown, Modal } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, Button, Dropdown } from 'react-bootstrap';
 import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import WpLogin from '../../services/WpLogin';
-import WpSignupModal from '../../services/WpSignupModal';
+import SignUpAPI from '../../services/SignUpAPI';
 
 const CustomNavbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [isLoggedIn, setLoggedIn] = useState(localStorage.getItem('authToken') !== null);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showSignupModal, setShowSignupModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Adicione o estado para controlar o status de login
 
-  const handleLoginChange = (isUserLoggedIn) => {
-    setLoggedIn(isUserLoggedIn);
-    setShowDropdown(false);
+  // Função para abrir/fechar o dropdown
+  const handleDropdownToggle = (isOpen) => {
+    setShowDropdown(isOpen);
   };
 
+  // Função para fazer logout
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    setLoggedIn(false);
+    // Adicione a lógica de logout aqui, como limpar o token JWT
+    setIsLoggedIn(false);
     setShowDropdown(false);
-  };
-
-  const handleShowLoginModal = () => {
-    setShowLoginModal(true);
-  };
-
-  const handleHideLoginModal = () => {
-    setShowLoginModal(false);
-  };
-
-  const handleShowSignupModal = () => {
-    setShowSignupModal(true);
-  };
-
-  const handleHideSignupModal = () => {
-    setShowSignupModal(false);
   };
 
   return (
@@ -58,7 +40,7 @@ const CustomNavbar = () => {
             <Nav.Link as={Link} to="/services">Serviços</Nav.Link>
             <Nav.Link as={Link} to="/contact">Contato</Nav.Link>
           </Nav>
-          <Dropdown show={showDropdown} onToggle={(isOpen) => setShowDropdown(isOpen)}>
+          <Dropdown show={showDropdown} onToggle={handleDropdownToggle}>
             <Dropdown.Toggle variant="dark" id="user-dropdown">
               <img
                 src={isLoggedIn ? "url-da-imagem-do-usuario" : ""}
@@ -76,30 +58,15 @@ const CustomNavbar = () => {
                 </>
               ) : (
                 <>
-                  <Dropdown.Item onClick={handleShowLoginModal}>Login</Dropdown.Item>
-                  <Dropdown.Item onClick={handleShowSignupModal}>Criar Conta</Dropdown.Item>
+                  {/* Adicione o SignUpAPI para exibir o formulário de login e fazer o login */}
+                  <SignUpAPI onLogin={() => setIsLoggedIn(true)} />
+                  <Dropdown.Item>Criar Conta</Dropdown.Item>
                 </>
               )}
             </Dropdown.Menu>
           </Dropdown>
         </Navbar.Collapse>
       </div>
-
-      {/* Adicione o modal de login aqui */}
-      <Modal show={showLoginModal} onHide={handleHideLoginModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <WpLogin onLogin={handleLoginChange} />
-        </Modal.Body>
-        {/* Adicione outros elementos do seu modal aqui */}
-      </Modal>
-
-      {/* Adicione o modal de criação de conta aqui */}
-      {showSignupModal && (
-        <WpSignupModal onHide={handleHideSignupModal} onSignup={handleLoginChange} />
-      )}
     </Navbar>
   );
 };

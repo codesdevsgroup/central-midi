@@ -1,66 +1,49 @@
+// WpLogin.js
 import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
-const WpLogin = ({ onLogin }) => {
+const WpLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('https://projeto.codesdevs.com/wp-json/custom/v1/login/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
+      // Fazer a chamada à API de autenticação do WordPress
+      const response = await axios.post('https://projeto.codesdevs.com/?rest_route=/simple-jwt-login/v1/autologin&JWT=JWT', {
+        username,
+        password,
       });
 
-      const data = await response.json();
+      // Obter o token JWT da resposta
+      const token = response.data.token;
 
-      if (data) {
-        // O login foi bem-sucedido
-        console.log('Login bem-sucedido!');
-        localStorage.setItem('authToken', 'seu-token-aqui');
-        onLogin(true);
-      } else {
-        // O login falhou
-        console.error('Login falhou');
-        onLogin(false);
-      }
+      // Decodificar o token JWT para obter informações do usuário
+      const decodedToken = jwtDecode(token);
+
+      // Você pode armazenar o token em localStorage ou em um estado do React para uso futuro
+      localStorage.setItem('token', token);
+
+      // Lógica adicional após o login bem-sucedido
+      console.log('Login bem-sucedido!', decodedToken);
     } catch (error) {
-      console.error('Erro durante o login:', error);
-      onLogin(false);
+      // Tratar erros de autenticação
+      console.error('Erro ao fazer login:', error);
     }
   };
 
   return (
-    <>
-      <Form>
-        <Form.Group controlId="formUsername">
-          <Form.Label>Nome de usuário</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Digite seu nome de usuário"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formPassword">
-          <Form.Label>Senha</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Digite sua senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-
-        <Button variant="primary" onClick={handleLogin}>
-          Login
-        </Button>
-      </Form>
-    </>
+    <div>
+      <label>
+        Username:
+        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+      </label>
+      <label>
+        Password:
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      </label>
+      <button onClick={handleLogin}>Login</button>
+    </div>
   );
 };
 
