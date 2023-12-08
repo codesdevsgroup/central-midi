@@ -1,0 +1,69 @@
+.banner_home{
+  margin-top: 50px;
+  height: 160px;
+  background-color: #000;
+  background: linear-gradient(101.44deg, #0C0C0C 16.29%, #9747FF 196.41%);
+  border-radius: 12px;
+  color: #fff;
+  width: 1060px;
+  margin-inline: auto;
+  padding: 25px;
+}
+
+#info_rlm {
+  padding-block: 70px;
+}
+
+#info_rlm .text_info_rlm h2{
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 48px;
+}
+
+#info_rlm .text_info_rlm p .p_title{
+  color: #FFFFFF;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+#info_rlm .text_info_rlm p{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #F4F3F3;
+}
+
+#info_rlm .text_info_rlm p strong{
+  font-weight: 700;
+  line-height: 30px;
+}
+
+#music_for_you{
+  margin-top: 80px;
+}
+
+#music_for_you .row{
+  
+  background-size: cover;
+}
+
+#music_for_you .grid_2 .text_title_music_for_you{
+  margin-bottom: 50px;
+}
+
+#music_for_you .grid_2 button{
+  width: 160px;
+  height: 40px;
+  border-radius: 20px;
+  margin-top: 30px;
+}
+
+#music_for_you .grid_2 a{
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #1C1B1F;
+  line-height: 20px;
+}
+
