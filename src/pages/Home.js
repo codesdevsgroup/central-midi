@@ -28,7 +28,7 @@ function Home() {
       <section id="info_rlm">
         <div class="container">
           <div class="row">
-            <div class="text-center mb-3">
+            <div class="text-center text-white mb-3">
               <h2>Você sabe o que MIDI, RLM e L?</h2>
               <p class="p_title">Você terá garantia total nos trabalhos desenvolvidos por nossa Equipe.</p>
             </div>
@@ -38,16 +38,19 @@ function Home() {
 
                 <p>
                   <img src="./assets/img/icons/headset_mic.png" alt="" />
+                  <strong>MIDI</strong>
                 </p>
                 <p class="ps-5">É a abreviação de Musical Instrument Digital Interface. É uma linguagem que permite que computadores, instrumentos musicais e outros hardwares se comuniquem.</p>
 
                 <p>
                   <img src="./assets/img/icons/headset_mic.png" alt="" />
+                  <strong>RML</strong> 
                 </p>
                 <p class="ps-5">É a abreviação de Musical Instrument Digital Interface. É uma linguagem que permite que computadores, instrumentos musicais e outros hardwares se comuniquem.</p>
 
                 <p>
                   <img src="./assets/img/icons/headset_mic.png" alt="" />
+                  <strong>L</strong> 
                 </p>
                 <p class="ps-5">É a abreviação de Musical Instrument Digital Interface. É uma linguagem que permite que computadores, instrumentos musicais e outros hardwares se comuniquem.</p>
 
@@ -68,7 +71,7 @@ function Home() {
 
       <ProductList />
 
-      <section id="music_for_you">
+      <section id="music_for_you" class="text-white">
         <div class="container">
           <div class="row" style={{backgroundImage: `url(${background_music_for_you})`}}>
             
