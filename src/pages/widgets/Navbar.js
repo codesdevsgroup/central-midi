@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, Form, FormControl, Button, Dropdown } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import SignUpAPI from '../../services/SignUpAPI';
+import Login from './Login';
 
 const CustomNavbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Adicione o estado para controlar o status de login
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Função para abrir/fechar o dropdown
   const handleDropdownToggle = (isOpen) => {
     setShowDropdown(isOpen);
   };
 
-  // Função para fazer logout
   const handleLogout = () => {
-    // Adicione a lógica de logout aqui, como limpar o token JWT
+    // Adicionar lógica de logout aqui, como limpar o token JWT
     setIsLoggedIn(false);
     setShowDropdown(false);
+  };
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    setShowLoginModal(false);
   };
 
   return (
@@ -40,33 +44,18 @@ const CustomNavbar = () => {
             <Nav.Link as={Link} to="/services">Serviços</Nav.Link>
             <Nav.Link as={Link} to="/contact">Contato</Nav.Link>
           </Nav>
-          <Dropdown show={showDropdown} onToggle={handleDropdownToggle}>
-            <Dropdown.Toggle variant="dark" id="user-dropdown">
-              <img
-                src={isLoggedIn ? "url-da-imagem-do-usuario" : ""}
-                alt="Imagem do Usuário"
-                className="user-avatar"
-              />
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              {isLoggedIn ? (
-                <>
-                  <Dropdown.Item href="#user-profile">Perfil</Dropdown.Item>
-                  <Dropdown.Item href="#user-settings">Configurações</Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item onClick={handleLogout}>Sair</Dropdown.Item>
-                </>
-              ) : (
-                <>
-                  {/* Adicione o SignUpAPI para exibir o formulário de login e fazer o login */}
-                  <SignUpAPI onLogin={() => setIsLoggedIn(true)} />
-                  <Dropdown.Item>Criar Conta</Dropdown.Item>
-                </>
-              )}
-            </Dropdown.Menu>
-          </Dropdown>
+
+          {isLoggedIn ? (
+            <Button variant="outline-light" onClick={handleLogout}>Logout</Button>
+          ) : (
+            <Button variant="outline-light" onClick={() => setShowLoginModal(true)}>Login</Button>
+          )}
+
         </Navbar.Collapse>
       </div>
+
+      {/* Componente Login */}
+      <Login show={showLoginModal} onHide={() => setShowLoginModal(false)} onLogin={handleLogin} />
     </Navbar>
   );
 };
